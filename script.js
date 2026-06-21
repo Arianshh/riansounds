@@ -1,94 +1,122 @@
-const projects = portfolioData.projects;
-let currentLang = localStorage.getItem("riansounds_lang") || "en";
+const projectKeys = ["rian", "jilliz", "jetpack"];
+let currentLang = "en"; // IMPORTANT: default is always English on every page load.
 let currentProjectKey = null;
 
-const panel = document.getElementById("projectPanel");
-const backButton = document.getElementById("backButton");
-const cursorLight = document.getElementById("cursorLight");
-const langToggle = document.getElementById("langToggle");
+const textIds = [
+  "logoFirst", "logoLast", "navProjects", "navTracks", "navAbout", "navContact",
+  "heroEyebrow", "heroTitle", "heroIntro", "telegramCTA", "bubbleSolo", "bubbleFive", "bubbleThree", "heroHint",
+  "backButton", "releasesTitle", "linksTitle", "selectedReleases", "acrossProjects",
+  "aboutEyebrow", "aboutTitle", "aboutText", "contactArian",
+  "contactEyebrow", "contactTitle", "contactText", "emailLabel", "telegramLabel",
+  "formName", "formEmail", "formMessage", "sendButton", "formNote"
+];
 
-function t(value) {
-  if (value && typeof value === "object" && !Array.isArray(value)) return value[currentLang] || value.en || "";
+function tr(value) {
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    return value[currentLang] || value.en || "";
+  }
   return value || "";
 }
-function ui(key) { return translations[currentLang][key] || translations.en[key] || key; }
 
-function platformLabel(name) {
-  const labels = {
-    en: { spotify:"Spotify", youtube:"YouTube", soundcloud:"SoundCloud", apple:"Apple" },
-    fa: { spotify:"اسپاتیفای", youtube:"یوتیوب", soundcloud:"ساندکلاد", apple:"اپل موزیک" }
-  };
-  return labels[currentLang][name] || name;
+function ui(key) {
+  return SITE_TEXT[currentLang][key] || SITE_TEXT.en[key] || "";
 }
 
-function applyStaticTranslations() {
-  document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = ui(el.dataset.i18n));
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => el.placeholder = ui(el.dataset.i18nPlaceholder));
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+function setHTML(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = value;
+}
+
+function applyLanguageShell() {
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === "fa" ? "rtl" : "ltr";
   document.body.classList.toggle("is-fa", currentLang === "fa");
-  langToggle.textContent = currentLang === "en" ? "فا" : "EN";
+
+  textIds.forEach(id => setText(id, ui(id)));
+
+  document.getElementById("formNameInput").placeholder = ui("formNamePlaceholder");
+  document.getElementById("formEmailInput").placeholder = ui("formEmailPlaceholder");
+  document.getElementById("formMessageInput").placeholder = ui("formMessagePlaceholder");
+
+  document.getElementById("langToggle").textContent = currentLang === "en" ? "فا" : "EN";
+
+  setHTML("bubbleRian", PROJECTS.rian.bubbleTitle[currentLang]);
+  setHTML("bubbleJilliz", PROJECTS.jilliz.bubbleTitle[currentLang]);
+  setHTML("bubbleJetpack", PROJECTS.jetpack.bubbleTitle[currentLang]);
+}
+
+function platformLabel(platform) {
+  return ui(platform) || platform;
 }
 
 function renderTrackLinks(track) {
   const platforms = ["spotify", "apple", "youtube", "soundcloud"];
-  const links = platforms
-    .filter(platform => track[platform])
+  const html = platforms
+    .filter(platform => Boolean(track[platform]))
     .map(platform => `<a href="${track[platform]}" target="_blank" rel="noreferrer">${platformLabel(platform)} ↗</a>`)
     .join("");
-  return links || `<span class="coming-soon">${ui("linkSoon")}</span>`;
+
+  return html || `<span class="coming-soon">${ui("linkSoon")}</span>`;
 }
 
 function renderTracks(tracks) {
   return tracks.map((track, index) => `
     <article class="release-card">
       <div class="release-number">${String(index + 1).padStart(2, "0")}</div>
-      <div>
+      <div class="release-content">
         <h3>${track.title}</h3>
-        <p>${t(track.type)} · ${t(track.role)}</p>
+        <p>${tr(track.type)} · ${tr(track.role)}</p>
         <div class="release-links">${renderTrackLinks(track)}</div>
       </div>
     </article>
   `).join("");
 }
 
-function renderProjectLinks(links = []) {
-  return links.map(link => `<a href="${link.url}" target="_blank" rel="noreferrer">${t(link.label)} ↗</a>`).join("");
+function renderProjectLinks(links) {
+  return links
+    .map(link => `<a href="${link.url}" target="_blank" rel="noreferrer">${tr(link.label)} ↗</a>`)
+    .join("");
 }
 
 function openProject(key) {
   currentProjectKey = key;
-  const project = projects[key];
-  document.getElementById("projectType").textContent = t(project.type);
-  document.getElementById("projectTitle").textContent = t(project.title);
+  const project = PROJECTS[key];
+
+  setText("projectType", tr(project.type));
+  setText("projectTitle", tr(project.title));
   document.getElementById("projectLinks").innerHTML = renderProjectLinks(project.links);
-  document.getElementById("projectDescription").textContent = t(project.description);
-  document.getElementById("projectTags").innerHTML = t(project.tags).map(tag => `<span>${tag}</span>`).join("");
+  setText("projectDescription", tr(project.description));
+  document.getElementById("projectTags").innerHTML = tr(project.tags).map(tag => `<span>${tag}</span>`).join("");
   document.getElementById("projectTracks").innerHTML = renderTracks(project.tracks);
-  panel.classList.add("active");
-  panel.scrollIntoView({ behavior:"smooth", block:"start" });
+
+  document.getElementById("projectPanel").classList.add("active");
+  document.getElementById("projectPanel").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function getFeaturedTracks() {
   return [
-    projects.jilliz.tracks.find(track => track.title === "Iran Khube"),
-    projects.rian.tracks.find(track => track.title === "Pakkon"),
-    projects.jetpack.tracks.find(track => track.title === "Kafi Nist"),
-    projects.rian.tracks.find(track => track.title === "Rakhte Tane Delbar"),
-    projects.jetpack.tracks.find(track => track.title === "Blue as a Girl")
+    PROJECTS.jilliz.tracks.find(t => t.title === "Iran Khube"),
+    PROJECTS.rian.tracks.find(t => t.title === "Pakkon"),
+    PROJECTS.jetpack.tracks.find(t => t.title === "Kafi Nist"),
+    PROJECTS.rian.tracks.find(t => t.title === "Rakhte Tane Delbar"),
+    PROJECTS.jetpack.tracks.find(t => t.title === "Blue as a Girl")
   ].filter(Boolean);
 }
-function renderFeaturedTracks() {
+
+function refreshAllText() {
+  applyLanguageShell();
   document.getElementById("featuredTracks").innerHTML = renderTracks(getFeaturedTracks());
-}
-function refreshLanguage() {
-  applyStaticTranslations();
-  renderFeaturedTracks();
   if (currentProjectKey) openProject(currentProjectKey);
 }
 
 document.querySelectorAll(".project-bubble").forEach(bubble => {
   bubble.addEventListener("click", () => openProject(bubble.dataset.project));
+
   bubble.addEventListener("mousemove", event => {
     const rect = bubble.getBoundingClientRect();
     bubble.style.setProperty("--mx", `${((event.clientX - rect.left) / rect.width) * 100}%`);
@@ -96,22 +124,22 @@ document.querySelectorAll(".project-bubble").forEach(bubble => {
   });
 });
 
-backButton.addEventListener("click", () => {
-  panel.classList.remove("active");
+document.getElementById("backButton").addEventListener("click", () => {
+  document.getElementById("projectPanel").classList.remove("active");
   currentProjectKey = null;
-  document.getElementById("projects").scrollIntoView({ behavior:"smooth", block:"center" });
+  document.getElementById("projects").scrollIntoView({ behavior: "smooth", block: "center" });
 });
 
-langToggle.addEventListener("click", () => {
+document.getElementById("langToggle").addEventListener("click", () => {
   currentLang = currentLang === "en" ? "fa" : "en";
-  localStorage.setItem("riansounds_lang", currentLang);
-  refreshLanguage();
+  refreshAllText();
 });
 
 window.addEventListener("mousemove", event => {
+  const cursorLight = document.getElementById("cursorLight");
   cursorLight.style.left = `${event.clientX}px`;
   cursorLight.style.top = `${event.clientY}px`;
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
-refreshLanguage();
+refreshAllText();

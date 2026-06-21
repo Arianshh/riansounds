@@ -1,9 +1,13 @@
-# Rian Sounds — Bilingual Website
+# Rian Sounds — Clean Bilingual Website
 
-Updated Persian version with natural Persian copy and Persian project names:
-- Rian: آرین
-- Jilliz Williz: جیلیز ویلیز
-- Jetpack: جتپک
+This version fixes language mixing and RTL/LTR collision.
+
+Important:
+- Default language is ALWAYS English on page load.
+- Persian appears only after clicking the language toggle.
+- No localStorage language persistence is used.
+- English and Persian text are stored separately in `data.js`.
+- RTL is applied only when Persian is active.
 
 Deploy:
-Push all files to your GitHub repo. Cloudflare Pages will redeploy automatically.
+Upload/push all files to GitHub. Cloudflare Pages will redeploy automatically.
