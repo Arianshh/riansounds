@@ -60,10 +60,12 @@ backButton.addEventListener("click", () => {
 });
 
 const featured = [
-  ...projects.rian.tracks.slice(0, 3),
-  ...projects.jilliz.tracks.slice(0, 2),
-  ...projects.jetpack.tracks.slice(0, 3)
-];
+  projects.jilliz.tracks.find(t => t.title === "Iran Khube"),
+  projects.rian.tracks.find(t => t.title === "Pakkon"),
+  projects.rian.tracks.find(t => t.title === "Rakhte Tane Delbar"),
+  projects.jetpack.tracks.find(t => t.title === "Kafi Nist"),
+  projects.jetpack.tracks.find(t => t.title === "Blue as a Girl")
+].filter(Boolean);
 document.getElementById("featuredTracks").innerHTML = renderTracks(featured);
 document.getElementById("year").textContent = new Date().getFullYear();
 
