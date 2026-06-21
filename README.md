@@ -1,10 +1,9 @@
-# Arian Shariat Portfolio Demo
+# Rian Sounds — Bilingual Website
 
-Open `index.html` in your browser to preview.
+Updated Persian version with natural Persian copy and Persian project names:
+- Rian: آرین
+- Jilliz Williz: جیلیز ویلیز
+- Jetpack: جتپک
 
-This version includes:
-- light playful bubble homepage
-- Rian / Jilliz Williz / Jetpack project sections
-- release cards with links
-- cropped portrait in About section
-- contact email: arian.shariat@gmail.com
+Deploy:
+Push all files to your GitHub repo. Cloudflare Pages will redeploy automatically.

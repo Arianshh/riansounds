@@ -1,48 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arian Shariat — Music Portfolio</title>
+  <title>Arian Shariat — Rian Sounds</title>
   <meta name="description" content="Arian Shariat — musician, singer-songwriter, producer. Projects: Rian, Jilliz Williz, Jetpack." />
+  <meta property="og:title" content="Arian Shariat — Rian Sounds">
+  <meta property="og:description" content="Singer · Songwriter · Producer">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://riansounds.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;750&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;750&family=Playfair+Display:wght@600&family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <div class="cursor-light" id="cursorLight"></div>
-
   <header class="site-header">
-    <a class="logo" href="#home"><span>Arian</span><span>Shariat</span></a>
+    <a class="logo" href="#home"><span data-i18n="logoFirst">Arian</span><span data-i18n="logoLast">Shariat</span></a>
     <nav>
-      <a href="#projects">Projects</a>
-      <a href="#tracks">Tracks</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#projects" data-i18n="navProjects">Projects</a>
+      <a href="#tracks" data-i18n="navTracks">Tracks</a>
+      <a href="#about" data-i18n="navAbout">About</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+      <button class="lang-toggle" id="langToggle" type="button">فا</button>
     </nav>
   </header>
 
   <main id="home">
     <section class="hero section">
-      <p class="eyebrow">musician · songwriter · producer</p>
-      <h1>Choose a little universe.</h1>
-      <p class="intro">
-        Born in Tehran in 1998, Arian Shariat is a musician, singer-songwriter, and producer.
-        Since 2017, he has explored different musical worlds through bands, solo work, and collaborations.
-      </p>
-      <a class="telegram-pill" href="https://t.me/RianSounds" target="_blank" rel="noreferrer">Join Rian Sounds →</a>
+      <p class="eyebrow" data-i18n="heroEyebrow">musician · songwriter · producer</p>
+      <h1 data-i18n="heroTitle">Choose a little universe.</h1>
+      <p class="intro" data-i18n="heroIntro"></p>
+      <a class="telegram-pill" href="https://t.me/RianSounds" target="_blank" rel="noreferrer" data-i18n="telegramCTA">Join Rian Sounds →</a>
 
       <div class="bubble-stage" id="projects">
-        <button class="project-bubble rian" data-project="rian"><span class="bubble-name">Rian</span><span class="bubble-note">solo</span></button>
-        <button class="project-bubble jilliz" data-project="jilliz"><span class="bubble-name">Jilliz<br>Williz</span><span class="bubble-note">5 members</span></button>
-        <button class="project-bubble jetpack" data-project="jetpack"><span class="bubble-name">Jetpack</span><span class="bubble-note">3 members</span></button>
+        <button class="project-bubble rian" data-project="rian"><span class="bubble-name">Rian</span><span class="bubble-note" data-i18n="bubbleSolo">solo</span></button>
+        <button class="project-bubble jilliz" data-project="jilliz"><span class="bubble-name">Jilliz<br>Williz</span><span class="bubble-note" data-i18n="bubbleFive">5 members</span></button>
+        <button class="project-bubble jetpack" data-project="jetpack"><span class="bubble-name">Jetpack</span><span class="bubble-note" data-i18n="bubbleThree">3 members</span></button>
       </div>
-      <p class="hint">Hover the bubbles. Click to enter.</p>
+      <p class="hint" data-i18n="heroHint">Hover the bubbles. Click to enter.</p>
     </section>
 
     <section class="project-panel section" id="projectPanel">
-      <button class="back-button" id="backButton">← back to bubbles</button>
+      <button class="back-button" id="backButton" data-i18n="backButton">← back to bubbles</button>
       <div class="panel-grid">
         <div>
           <p class="eyebrow" id="projectType">project</p>
@@ -52,58 +53,51 @@
           <div class="tags" id="projectTags"></div>
         </div>
         <div class="track-card">
-          <div class="section-title"><span>Releases</span><span>links</span></div>
+          <div class="section-title"><span data-i18n="releasesTitle">Releases</span><span data-i18n="linksTitle">links</span></div>
           <div class="tracks" id="projectTracks"></div>
         </div>
       </div>
     </section>
 
     <section class="featured section" id="tracks">
-      <div class="section-title"><span>Selected releases</span><span>across projects</span></div>
+      <div class="section-title"><span data-i18n="selectedReleases">Selected releases</span><span data-i18n="acrossProjects">across projects</span></div>
       <div class="featured-list" id="featuredTracks"></div>
     </section>
 
     <section class="about section" id="about">
-      <div class="about-image-wrap">
-        <img src="./assets/arian-portrait.jpg" alt="Portrait of Arian Shariat outdoors, looking toward sunlight" class="about-image">
-      </div>
+      <div class="about-image-wrap"><img src="./assets/arian-portrait.jpg" alt="Portrait of Arian Shariat" class="about-image"></div>
       <div class="about-text">
-        <p class="eyebrow">about</p>
-        <h2>Between songs, bands, and experiments.</h2>
-        <p>
-          Arian Shariat is an Iranian musician, singer-songwriter, and producer with a background in Computer Engineering.
-          His professional music journey began with Jetpack in 2017, and has since expanded into the solo project Rian,
-          the Persian alternative/fusion band Jilliz Williz, and different collaborations as a songwriter and producer.
-        </p>
-        <a class="telegram-pill about-pill" href="mailto:arian.shariat@gmail.com">Contact Arian →</a>
+        <p class="eyebrow" data-i18n="aboutEyebrow">about</p>
+        <h2 data-i18n="aboutTitle">Between songs, bands, and experiments.</h2>
+        <p data-i18n="aboutText"></p>
+        <a class="telegram-pill about-pill" href="mailto:arian.shariat@gmail.com" data-i18n="contactArian">Contact Arian →</a>
       </div>
     </section>
 
     <section class="contact section" id="contact">
       <div class="contact-copy">
-        <p class="eyebrow">contact</p>
-        <h2>Let’s make something playful.</h2>
-        <p>For collaborations, production, songwriting, gigs, or just saying hi.</p>
+        <p class="eyebrow" data-i18n="contactEyebrow">contact</p>
+        <h2 data-i18n="contactTitle">Let’s make something playful.</h2>
+        <p data-i18n="contactText"></p>
         <div class="socials">
-          <a href="mailto:arian.shariat@gmail.com">Email</a>
-          <a href="https://t.me/RianSounds" target="_blank" rel="noreferrer">Telegram</a>
+          <a href="mailto:arian.shariat@gmail.com" data-i18n="emailLabel">Email</a>
+          <a href="https://t.me/RianSounds" target="_blank" rel="noreferrer" data-i18n="telegramLabel">Telegram</a>
           <a href="https://www.instagram.com/rian.sounds" target="_blank" rel="noreferrer">Rian Instagram</a>
           <a href="https://www.instagram.com/jillizwilliz" target="_blank" rel="noreferrer">Jilliz Instagram</a>
           <a href="https://www.instagram.com/_jetpack_" target="_blank" rel="noreferrer">Jetpack Instagram</a>
         </div>
       </div>
       <form class="contact-form" action="mailto:arian.shariat@gmail.com" method="POST" enctype="text/plain">
-        <label><span>Name</span><input name="name" type="text" placeholder="Your name" required></label>
-        <label><span>Email</span><input name="email" type="email" placeholder="you@example.com" required></label>
-        <label><span>Message</span><textarea name="message" rows="5" placeholder="Production? Band booking? A song idea?" required></textarea></label>
-        <button type="submit">Send message</button>
-        <p class="form-note">This opens the visitor's email app. Later, connect Formspree or Netlify Forms.</p>
+        <label><span data-i18n="formName">Name</span><input name="name" type="text" data-i18n-placeholder="formNamePlaceholder" required></label>
+        <label><span data-i18n="formEmail">Email</span><input name="email" type="email" data-i18n-placeholder="formEmailPlaceholder" required></label>
+        <label><span data-i18n="formMessage">Message</span><textarea name="message" rows="5" data-i18n-placeholder="formMessagePlaceholder" required></textarea></label>
+        <button type="submit" data-i18n="sendButton">Send message</button>
+        <p class="form-note" data-i18n="formNote"></p>
       </form>
     </section>
   </main>
 
   <footer><span>© <span id="year"></span> Arian Shariat</span><span><a href="mailto:arian.shariat@gmail.com">arian.shariat@gmail.com</a></span></footer>
-
   <script src="./data.js"></script>
   <script src="./script.js"></script>
 </body>
