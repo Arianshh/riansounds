@@ -17,6 +17,18 @@ const portfolioData = {
         { title: "Pakkon", type: "EP", role: "Rian", spotify: "https://open.spotify.com/album/6RCFziW6R3TXDMcg15OeLj?si=4EPlyx28SYi7SlszT6lZwg", soundcloud: "https://on.soundcloud.com/885uwJFFZPq8HApMmw" },
         { title: "Rakhte Tane Delbar", type: "Single", role: "Rian ft. Monicki", spotify: "https://open.spotify.com/track/7IrhaaNcXMdcjBJCwF9IhB?si=Wa7AeGyqRziXIdnvDx6XrQ", soundcloud: "https://on.soundcloud.com/20FSc5JLE46xzh0HYg" },
         { title: "Maashoogh e Jan", type: "Single", role: "Rian ft. Monicki", spotify: "https://open.spotify.com/track/5zTaz8DHfXcb9nslqZfjg8?si=SWr0E_ZsRCSwSB13U54kFQ", soundcloud: "https://on.soundcloud.com/ZmWjZq1mBwgSUqoQUf" },
+{
+  title: "Feragh",
+  type: "Single",
+  role: "Rian",
+  spotify: "https://open.spotify.com/track/452Y30L54k2DBjJMCq4eDQ?si=b5726f3d5c9b4c1b"
+},
+{
+  title: "Hala Mano Bebin (See Me Now)",
+  type: "Single",
+  role: "Rian",
+  spotify: "https://open.spotify.com/track/3bV9fb6CumOecxJIXYrgz0?si=621241f0290c4bfe"
+},
         { title: "Loss", type: "Single", role: "Rian", soundcloud: "https://on.soundcloud.com/S8F9gU9cb447pAVcej" },
         { title: "Ghesse Mahtab", type: "Single", role: "Rian", soundcloud: "https://on.soundcloud.com/joWItPQRNkyiqOmOLz" },
         { title: "Oddi", type: "Produced by Rian", role: "Danak0l", spotify: "https://open.spotify.com/album/0PD8cAtcT2Yq5vKay9Eqfl?si=nacamtT5RcGLq8hvrccLmQ", soundcloud: "https://on.soundcloud.com/fmom6oeEax34iRGCMn" },
